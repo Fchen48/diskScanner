@@ -11,9 +11,7 @@ let mainWindow;
 electron.app.on("ready", () => {
     setTimeout(() => {
         pug({ pretty: true })
-        .then(pugData => {
-            console.log(pugData);
-
+        .then(() => {
             const woptions = {
                 show: false,
                 frame: false,
@@ -26,7 +24,7 @@ electron.app.on("ready", () => {
 
             mainWindow = new electron.BrowserWindow(woptions);
             mainWindow.loadURL(url.format({
-                pathname: path.join(__dirname, "html", "index.html"),
+                pathname: path.join(__dirname, "views", "index.pug"),
                 protocol: "file:",
                 slashes: true
             }));
@@ -41,18 +39,25 @@ electron.app.on("ready", () => {
 
             mainWindow.once("ready-to-show", () => {
                 mainWindow.show();
+                if(process.env.TERM_PROGRAM == "vscode") {
+                    mainWindow.webContents.openDevTools();
+                }
             });
         })
         .catch(console.error);
     }, 50);
 });
 
+electron.ipcMain.on("window:minimize", () => {
+    const window = electron.BrowserWindow.getFocusedWindow();
+    if(window.isMinimized()) {
+        window.restore();
+        return;
+    }
+    window.minimize();
+});
 
 // let i = 0;
-// process.stdout.clearLine();
-// const root = dt("/", null, null, (folder, path, stats) => {
-//     i++;
-//     process.stdout.cursorTo(0);
-//     process.stdout.write("Analyzed files: " + i);
-// });
+// const root = dt(".", null, null, () => i++);
+// console.log("Analyzed files: " + i);
 // console.log(root);

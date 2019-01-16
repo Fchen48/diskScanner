@@ -1,24 +1,16 @@
-const d3 = require("d3");
+const electron = require("electron");
+const dt = require("directory-tree");
+const sunburst = require("sunburst-chart");
+setTimeout(() => {
+    const root = dt(".", null, null);
 
-const data = [
-    { width: 200,
-        height: 100,
-        fill: "green" },
-    { width: 100,
-        height: 70,
-        fill: "blue" },
-    { width: 130,
-        height: 30,
-        fill: "red" },
 
-];
+    const sb = sunburst()
+    .data(root)
+    .size("size")
+    .minSliceAngle(2.3)
+    .sort((a, b) => b.size - a.size)
+    .showLabels(true)
+    .tooltipContent(element => element.name + "\n" + element.size)(document.getElementById("sunburst"));
 
-const svg = d3.select("#sunburst");
-svg.append("g")
-.selectAll("g")
-.data(data)
-.enter()
-.append("rect")
-.attr("width", d => d.width)
-.attr("height", d => d.height)
-.attr("fill", d => d.fill);
+}, 500);

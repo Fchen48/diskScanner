@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(href="../css/diskscanner.css", rel="stylesheet")
+        
+        title DiskScanner
+    body
+        header
+            td DiskScanner
+            button#close(class="right button button-x" onclick="window.close();")
+                img(width=12 src="../images/close.svg" onclick="window.close();")
+            button#minimize(class="right button" onclick="electron.ipcRenderer.send('window:minimize');")
+                img(width=12 src="../images/minimize.svg")
+        nav
+        main
+            div#sunburst
+            //- svg#sunburst
+        footer
+        script
+            include ../js/index.js
+        
