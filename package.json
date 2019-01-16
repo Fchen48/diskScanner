@@ -10,14 +10,14 @@
   "author": "Fchen",
   "license": "GPL-3.0-or-later",
   "devDependencies": {
-    "electron": "^4.0.0",
+    "electron": "^4.0.1",
     "electron-pug": "^2.0.0",
-    "eslint": "^5.11.1",
+    "eslint": "^5.12.0",
     "nodemon": "^1.18.9"
   },
   "dependencies": {
     "d3": "^5.7.0",
-    "directory-tree": "https://github.com/Fchen48/node-directory-tree.git",
+    "directory-tree": "git+https://github.com/Fchen48/node-directory-tree.git",
     "electron-config": "^2.0.0"
   }
 }
